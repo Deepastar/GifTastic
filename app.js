@@ -39,7 +39,8 @@ function createButtonEvent() {
         // < !--storing the data - cartoon property to var topics from button -->
         var topics = $(this).attr("data-cartoon");
         //   < !--creating query url using data - cartoon-- >
-        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + topics + "&api_key=H890Ab3kCNkRDJwCvYtH8GKQRqikBdHZ";
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + topics 
+        + "&api_key=H890Ab3kCNkRDJwCvYtH8GKQRqikBdHZ&limit=10";
 
         // < !--requesting ajax with qURL here-- >
         $.ajax({
