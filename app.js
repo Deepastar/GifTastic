@@ -29,13 +29,13 @@ function createButtons() {
 function createButton(searchStr){
     var buttonObj = $("<button>");
     buttonObj.attr("data-cartoon", searchStr);
-    buttonObj.attr("class", "charTag ml-2");
+    buttonObj.attr("class", "ml-2 mt-2 text-info");
     buttonObj.text(searchStr);
     return buttonObj;
 }
 
 function createButtonEvent() {
-    $("button.charTag").on("click", function () {
+    $("button").on("click", function () {
         // < !--storing the data - cartoon property to var topics from button -->
         var topics = $(this).attr("data-cartoon");
         //   < !--creating query url using data - cartoon-- >
@@ -58,14 +58,16 @@ function createButtonEvent() {
                 var result = (response.data);
                 $("#giftastic").empty();
 
-                // looping her for displaying gifs by appending
+                // looping here for displaying gifs for 10 counts
 
                 for (i = 1; i <= 10; i++) {
 
                     // here we creating a new div and storing in var
 
                     var cartoonDiv = $("<div>");
-                    cartoonDiv.attr("class", "col");
+
+                    //  setting col attribute
+                    cartoonDiv.attr("class", "col mt-2 text-light");
 
                     // creating p and rating tag
 
@@ -82,9 +84,11 @@ function createButtonEvent() {
                     cartoonImage.attr("data-animate", result[i].images.fixed_height.url)
                     cartoonImage.attr("state", "still");
 
-                    // here we appending images to the images to cartoonDiv
+                    // here we appending into cartoonDiv with ptag(rating)  and images
                     (cartoonDiv).append(p);
                     (cartoonDiv).append(cartoonImage);
+                    
+                    // here we craeting evevt called addClickEventToImage and prepanding the images to display according
                     addClickEventToImage(cartoonImage);
                     $("#giftastic").prepend(cartoonDiv);
                 }
@@ -96,30 +100,40 @@ function createButtonEvent() {
 
 function addClickEventToImage(cartoonImage) {
     cartoonImage.on("click", function () {
+
+        // craetinng var to store the state of cartoonImage 
         var state = cartoonImage.attr("state");
 
+        // doing if else condiion here to animate or to be still
+
         if (state === "still") {
-            var stillSource = cartoonImage.attr("data-animate");
-            cartoonImage.attr("src", stillSource);
+            var animatedSource = cartoonImage.attr("data-animate");
+            cartoonImage.attr("src", animatedSource);
             cartoonImage.attr("state", "animate");
         } else {
-            var animateSource = cartoonImage.attr("data-still");
-            cartoonImage.attr("src", animateSource);
+            var stillSource = cartoonImage.attr("data-still");
+            cartoonImage.attr("src", stillSource);
             cartoonImage.attr("state", "still");
         }
 
     });
 }
-
+    //    writing function event for submit button
 function createSubmitEvent(){
     $("#submitSearch").submit(function(event ){
+
+        // setting variable to store the input value
         var searchStr = $("input:text").val();
         console.log("Test :" + searchStr);
+        //  here pushing var into the array 
         searchArray.push(searchStr);
-        
+        // creating var to button obj to store the array value
         var buttonObj = createButton(searchStr);
+        // here we appending button to button list
         $("#buttonList").append(buttonObj);
+        // creating button event 
         createButtonEvent();
+        // finally have to cancel the default action of button
         event.preventDefault(); 
     });
 }
