@@ -60,14 +60,14 @@ function createButtonEvent() {
 
                 // looping here for displaying gifs for 10 counts
 
-                for (i = 1; i <= 10; i++) {
+                for (i = 0; i < 10; i++) {
 
                     // here we creating a new div and storing in var
 
                     var cartoonDiv = $("<div>");
 
                     //  setting col attribute
-                    cartoonDiv.attr("class", "col mt-2 text-light");
+                    cartoonDiv.attr("class", "col text-light");
 
                     // creating p and rating tag
 
@@ -78,15 +78,26 @@ function createButtonEvent() {
                     var cartoonImage = $("<img>");
 
                     //  setting source image attribute to cartoon image by array index
-
                     cartoonImage.attr("src", result[i].images.fixed_height_still.url);
                     cartoonImage.attr("data-still", result[i].images.fixed_height_still.url);
                     cartoonImage.attr("data-animate", result[i].images.fixed_height.url)
                     cartoonImage.attr("state", "still");
+                    
+                    //Creating download button
+                    // var downloadLnk = $("<a>");
+                    // downloadLnk.attr("href", result[i].images.fixed_height.url);
+                    // var downUrl = result[i].images.fixed_height.url;
+                    // var filename = downUrl.substring(downUrl.lastIndexOf('/')+1);
+                    // downloadLnk.attr("download", filename);
+                    // downloadLnk.text("Download");
 
                     // here we appending into cartoonDiv with ptag(rating)  and images
-                    (cartoonDiv).append(p);
                     (cartoonDiv).append(cartoonImage);
+                    (cartoonDiv).append(p);
+                    // (cartoonDiv).append(downloadLnk);
+                    
+                    
+
                     
                     // here we craeting evevt called addClickEventToImage and prepanding the images to display according
                     addClickEventToImage(cartoonImage);
